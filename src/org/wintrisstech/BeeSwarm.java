@@ -36,6 +36,10 @@ public class BeeSwarm extends JComponent implements ActionListener
     private boolean queenIsMovingRight;
     private int queenX = windowWidth / 2;
     private int queenY = windowHeight / 2;
+    
+    private Flower flower = new Flower();
+    
+    private MiniBees[] bee=  new MiniBees [20];
 
     public static void main(String[] args) throws IOException
     {
@@ -58,6 +62,14 @@ public class BeeSwarm extends JComponent implements ActionListener
         beeRight = ImageIO.read(getClass().getResource("bee_right.png"));
         // Initialize the queen's position
         updateQueen();
+        
+        for(int i = 0; i < 20; i++)
+            
+        {
+            bee[i] = new MiniBees();
+        }
+            
+            
     }
 
     @Override
@@ -71,6 +83,14 @@ public class BeeSwarm extends JComponent implements ActionListener
     {
         g.drawImage(background, 0, 0, windowWidth, windowHeight, null);
 
+        flower.paint(g);
+        
+        for (int i = 0; i < 20; i++)
+        {
+            bee[i].paint(g);
+        }
+
+        
         if (queenIsMovingRight)
         {
             g.drawImage(beeRight, queenX - queenWidth / 2,
@@ -84,6 +104,7 @@ public class BeeSwarm extends JComponent implements ActionListener
                     queenWidth, queenHeight, null);
 
         }
+        
     }
 
     @Override
